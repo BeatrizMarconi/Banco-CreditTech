@@ -23,6 +23,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
 import { isLogged } from "../../services";
+import { PrivateNav } from "../PrivateNav";
 
 export default function Header() {
 
@@ -56,7 +57,7 @@ export default function Header() {
                             aria-label={"Open Menu"}
                             display={{ md: "none" }}
                             onClick={isOpen ? onClose : onOpen}/>
-                            
+
                         <HStack spacing={8} alignItems={"center"}>
                             <Box p={2}>
                                 <Image src={logo} boxSize="70px"/>
@@ -67,7 +68,7 @@ export default function Header() {
                                     spacing={4}
                                     display={{ base: "none", md: "flex" }}
                                 >
-                                    {/* <PrivateNav /> */}
+                                    <PrivateNav/>
                                 </HStack>
                             )}
                         </HStack>
@@ -159,7 +160,7 @@ export default function Header() {
                     {isOpen ? (
                         <Box pb={4} display={{ md: "none" }}>
                             <Stack as={"nav"} spacing={4}>
-                                {/* <PrivateNav /> */}
+                                <PrivateNav/>
                             </Stack>
                         </Box>
                     ) : null}
