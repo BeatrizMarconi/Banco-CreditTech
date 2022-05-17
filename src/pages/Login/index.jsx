@@ -95,7 +95,7 @@ export default function Login() {
                             <Stack pt={6}>
                                 <Text align={"center"}>
                                     Não possui uma conta?{" "}
-                                    <Link style={{ color: "#4299e1" }} to="/cadastro">
+                                    <Link style={{ color: "#4299e1" }} to="/signUp">
                                         Cadastre-se
                                     </Link>
                                 </Text>
