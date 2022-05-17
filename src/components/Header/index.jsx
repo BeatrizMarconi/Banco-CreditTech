@@ -1,6 +1,6 @@
 import React from "react";
 import { FiChevronDown } from "react-icons/fi";
-import { AddIcon, CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
     Box,
     Button,
