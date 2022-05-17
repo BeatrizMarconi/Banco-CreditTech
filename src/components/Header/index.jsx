@@ -30,7 +30,7 @@ export default function Header() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const navigate = useNavigate();
     const goToLogin = () => navigate(`/login`);
-    const goToProfile = () => navigate(`/perfil`);
+    // const goToProfile = () => navigate(`/perfil`);
     const [userIsLogged] = isLogged();
 
     const logout = () => {
@@ -107,7 +107,7 @@ export default function Header() {
                                             </HStack>
                                         </MenuButton>
                                         <MenuList>
-                                            <MenuItem onClick={goToProfile}>
+                                            <MenuItem /*onClick={goToProfile}*/>
                                                 Meu perfil
                                             </MenuItem>
                                             <MenuDivider />
@@ -145,10 +145,8 @@ export default function Header() {
                                     }}
                                 >
                                     <Link
-                                        style={{
-                                            padding: "12px 15px",
-                                        }}
-                                        to="/cadastro"
+                                        style={{padding: "12px 15px",}}
+                                        to="/signUp"
                                     >
                                         CADASTRO
                                     </Link>
