@@ -12,7 +12,7 @@ export default function Operations() {
         if (userIsLogged === "") {
             navigate(`/login`);
         }
-    }, []);
+    },);
     return (
         <>
             <Header/>
