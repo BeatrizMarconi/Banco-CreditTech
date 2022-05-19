@@ -1,4 +1,5 @@
 import React from "react";
+import {MdOutlineLogout} from "react-icons/md";
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
     Box,
@@ -10,7 +11,8 @@ import {
     Stack,
     useColorModeValue,
     useDisclosure,
-    Image
+    Image, 
+    Text
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
@@ -71,13 +73,12 @@ export default function Header() {
                                         fontSize={"md"}
                                         fontWeight={600}
                                         color={"white"}
-                                        bg={"pink.400"}
-                                        padding={0}
+                                        bg={"#3948a1"}
+                                        padding={5}
                                         href={"#"}
                                         _hover={{
-                                        bg: "pink.300",}}
-                                        width="60px">
-                                                Sair
+                                        bg: "pink.300",}}>
+                                        <MdOutlineLogout/> <Text ml={1} fontSize={17}>Sair</Text>
                                     </Button>
                                 </Flex>
                             )}

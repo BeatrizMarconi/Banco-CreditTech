@@ -9,29 +9,34 @@ import {
     Heading,
     Text,
     useColorModeValue,
-    Alert,
-    AlertIcon,
+    useToast
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { auth } from "../../services/auth"
-import { useState } from "react";
+import api from "../../services/api";
 
 export default function Login() {
     const navigate = useNavigate();
-    const [error, setError] = useState(true);
+    const { register, handleSubmit } = useForm();
+    const toast = useToast()
 
-    const {register,handleSubmit} = useForm();
-
-    //função recebe dados input e manda pra auth verificar e guardar no user o retorno (true ou false)
     const goToLogin = (data) => {
-        const user = auth(data);
-
-        if (user) {
-            navigate(`/dashboard`);
-        } else {
-            setError(user);
-        }
+        api.post("/login", data)
+            .then((res) => {
+                let token = Math.random().toString(36);
+                window.localStorage.setItem('token', JSON.stringify(token));
+                navigate(`/dashboard`)
+                console.log(res)
+            })
+            .catch((error) => {
+                toast({
+                    title: 'Usuário ou senha incorretos!',
+                    status: 'error',
+                    duration: 6000,
+                    isClosable: true,
+                })
+                console.log(error)
+            });
     };
 
     return (
@@ -40,7 +45,7 @@ export default function Login() {
             align={"center"}
             justify={"center"}
             bg={useColorModeValue("gray.50", "gray.800")}>
-                
+
             <Stack spacing={8} mx={"auto"} width="500px" py={12} px={6}>
                 <Stack align={"center"}>
                     <Heading fontSize={"4xl"}>Acesse sua conta</Heading>
@@ -53,12 +58,6 @@ export default function Login() {
                 >
                     <form onSubmit={handleSubmit(goToLogin)}>
                         <Stack spacing={4}>
-                            {!error && (
-                                <Alert status="error">
-                                    <AlertIcon />
-                                    Usuário ou senha incorretos
-                                </Alert>
-                            )}
                             <FormControl id="email" isRequired>
                                 <FormLabel>Usuário</FormLabel>
 
@@ -66,13 +65,13 @@ export default function Login() {
                                     type={"email"}
                                     {...register("email", { required: true })}
                                 />
-                            
+
                             </FormControl>
                             <FormControl id="password" isRequired>
                                 <FormLabel>Senha</FormLabel>
                                 <Input
                                     type="password"
-                                    {...register("password", { required: true })}
+                                    {...register("senha", { required: true })}
                                 />
                             </FormControl>
                             <Stack spacing={10}>
