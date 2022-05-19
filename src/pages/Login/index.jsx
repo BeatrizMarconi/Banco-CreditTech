@@ -27,6 +27,7 @@ export default function Login() {
         formState: { errors },
     } = useForm();
 
+    //função recebe dados input e manda pra auth verificar e guardar no user o retorno (true ou false)
     const goToLogin = (data) => {
         const user = auth(data);
 
@@ -69,8 +70,7 @@ export default function Login() {
                                     type={"email"}
                                     {...register("email", { required: true })}
                                 />
-                                {console.log(errors)}
-                                {errors.email && <span>This field is required</span>}
+                            
                             </FormControl>
                             <FormControl id="password" isRequired>
                                 <FormLabel>Senha</FormLabel>
