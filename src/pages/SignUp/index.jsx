@@ -13,6 +13,7 @@ import {
     Heading,
     Text,
     useColorModeValue,
+    FormErrorMessage
 } from "@chakra-ui/react";
 import InputMask from "react-input-mask";
 import { useState } from "react";
@@ -42,7 +43,7 @@ export default function SignUp() {
                 justify={"center"}
                 bg={useColorModeValue("gray.50", "gray.800")}>
 
-                <Stack spacing={8} mx={"auto"} width="500px" marginTop={20}>
+                <Stack spacing={8} mx={"auto"} width="500px">
                     <Stack align={"center"}>
                         <Heading fontSize={"4xl"} textAlign={"center"}>
                             Cadastre-se
@@ -66,35 +67,37 @@ export default function SignUp() {
                                     <Input type="email" {...register("email", { required: true })}/>
                                     
                                 </FormControl>
-                                <HStack>
+                                <HStack alignItems="flex-start">
                                     <Box width="100%">
                                         <FormControl id="dataNasc" isRequired>
                                             <FormLabel>Data de nasc.</FormLabel>
-                                            <Input type="date" {...register("date", { required: true })}/>
+                                            <Input type="date" {...register("dataNascimento", { required: true })}/>
 
                                         </FormControl>
                                     </Box>
                                     <Box width="100%">
-                                        <FormControl id="cpf" isRequired>
-                                            <FormLabel>CPF</FormLabel>
+                                        <FormControl id="cpf" isInvalid={errors.cpf}>
+                                            <FormLabel>CPF <span style={{color:"#e53e3e"}}>*</span></FormLabel>
                                             <Input
                                                 as={InputMask}
                                                 mask="999.999.999-99"
                                                 placeholder="___.___.___-__"
                                                 type="text"
-                                                {...register("cpf", { required: true })}/>
+                                                {...register("cpf", { required: true, pattern: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/})}/>
+                                                <FormErrorMessage>Preenchimento obrigatório.</FormErrorMessage>
                                                 
                                         </FormControl>
                                     </Box>
                                 </HStack>
-                                <FormControl id="telefone" isRequired>
-                                    <FormLabel>Telefone</FormLabel>
+                                <FormControl id="telefone" isInvalid={errors.telefone}>
+                                    <FormLabel>Telefone <span style={{color:"#e53e3e"}}>*</span></FormLabel>
                                     <Input
                                         as={InputMask}
                                         mask="(99) 99999-9999"
                                         placeholder="(11) 99999-9999"
                                         type="text"
-                                        {...register("telefone", { required: true })}/>
+                                        {...register("telefone", { required: true, pattern: /^(\(11\) (9\d{4})-\d{4})|((\(1[2-9]{1}\)|\([2-9]{1}\d{1}\)) [5-9]\d{3}-\d{4})$/ })}/>
+                                        <FormErrorMessage>Preenchimento obrigatório.</FormErrorMessage>
                                     
                                 </FormControl>
                                 <FormControl id="password" isRequired>
