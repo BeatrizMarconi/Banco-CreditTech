@@ -14,18 +14,14 @@ import {
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { auth } from "../../services"
+import { auth } from "../../services/auth"
 import { useState } from "react";
 
 export default function Login() {
     const navigate = useNavigate();
     const [error, setError] = useState(true);
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
+    const {register,handleSubmit} = useForm();
 
     //função recebe dados input e manda pra auth verificar e guardar no user o retorno (true ou false)
     const goToLogin = (data) => {

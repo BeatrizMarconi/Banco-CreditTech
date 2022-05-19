@@ -24,7 +24,7 @@ import { useForm } from "react-hook-form";
 export default function SignUp() {
 
     const [showPassword, setShowPassword] = useState(false);
-    const [error, setError] = useState(true);
+    // const [error, setError] = useState(true);
     const {
         register,
         handleSubmit,

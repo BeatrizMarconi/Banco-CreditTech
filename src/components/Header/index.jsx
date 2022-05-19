@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
-import { isLogged } from "../../services";
+import { isLogged } from "../../services/auth";
 import { PrivateNav } from "../PrivateNav";
 
 export default function Header() {
