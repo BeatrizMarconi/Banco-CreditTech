@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { FiChevronDown } from "react-icons/fi";
 import {
@@ -11,7 +11,7 @@ import {
     Stack,
     useColorModeValue,
     useDisclosure,
-    Image, 
+    Image,
     Text,
     Menu,
     MenuButton,
@@ -26,6 +26,8 @@ import logo from "../../assets/logo.jpg";
 import { isLogged } from "../../services/auth";
 import { PrivateNav } from "../PrivateNav";
 import { AppContext } from "../../context/appContext";
+import api from "../../services/api";
+
 
 export default function Header() {
 
@@ -35,13 +37,34 @@ export default function Header() {
     // const goToProfile = () => navigate(`/perfil`);
     const [userIsLogged] = isLogged();
     const [saldo, setSaldo] = useContext(AppContext);
+    const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")));
 
-    
+    const formatMoney = (valor) => {
+        let valorFormatado = parseFloat(valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}).replace(".", ",");
+        console.log(valorFormatado)
+    }
+
+    const getFirstName = (nome) => {
+        return nome.split(' ')[0].toUpperCase()
+    }
 
     const logout = () => {
-        window.localStorage.setItem("token", JSON.stringify(""));
+        window.localStorage.clear();
         navigate(`/`);
     };
+
+    useEffect(() => {
+
+        if (user) {
+            api.get(`/conta/saldo/${user.cpf}`)
+                .then((res) => {
+                    setSaldo(res.data.saldo)
+                })
+                .catch(() => {
+
+                })
+        }
+    }, [])
 
     return (
         <>
@@ -80,46 +103,47 @@ export default function Header() {
                         <HStack spacing={{ base: "0", md: "6" }}>
                             {userIsLogged && (
                                 <Flex alignItems={"center"}>
-                                <Box
-                                  marginRight={8}
-                                  borderRight="1px"
-                                  borderColor={"gray.200"}
-                                  paddingRight={8}
-                                >
-                                  <Text>Saldo</Text>
-                                  <Text fontWeight={700} fontSize={"18px"}>
-                                    R$ {saldo}
-                                  </Text>
-                                </Box>
-                                <Menu>
-                                  <MenuButton
-                                    py={2}
-                                    transition="all 0.3s"
-                                    _focus={{ boxShadow: "none" }}
-                                  >
-                                    <HStack>
-                                      <VStack
-                                        display={{ base: "none", md: "flex" }}
-                                        alignItems="flex-start"
-                                        spacing="1px"
-                                        ml="2"
-                                      >
-                                        <Text fontSize="sm">OLÁ, FULANO</Text>
-                                      </VStack>
-                                      <Box display={{ base: "none", md: "flex" }}>
-                                        <FiChevronDown />
-                                      </Box>
-                                    </HStack>
-                                  </MenuButton>
-                                  <MenuList>
-                                    <MenuItem /*onClick={goToProfile}*/>
-                                      Meu perfil
-                                    </MenuItem>
-                                    <MenuDivider />
-                                    <MenuItem onClick={logout}>Sair</MenuItem>
-                                  </MenuList>
-                                </Menu>
-                              </Flex>
+                                    <Box
+                                        marginRight={8}
+                                        borderRight="1px"
+                                        borderColor={"gray.200"}
+                                        paddingRight={8}
+                                    >
+                                        <Text>Saldo</Text>
+                                        <Text fontWeight={700} fontSize={"18px"}>
+                                            {Intl.NumberFormat('pt-br', {style: 'currency', currency: 'BRL'}).format(saldo)}
+                                            
+                                        </Text>
+                                    </Box>
+                                    <Menu>
+                                        <MenuButton
+                                            py={2}
+                                            transition="all 0.3s"
+                                            _focus={{ boxShadow: "none" }}
+                                        >
+                                            <HStack>
+                                                <VStack
+                                                    display={{ base: "none", md: "flex" }}
+                                                    alignItems="flex-start"
+                                                    spacing="1px"
+                                                    ml="2"
+                                                >
+                                                    <Text fontSize="sm">OLÁ, {getFirstName(user.nome)}</Text>
+                                                </VStack>
+                                                <Box display={{ base: "none", md: "flex" }}>
+                                                    <FiChevronDown />
+                                                </Box>
+                                            </HStack>
+                                        </MenuButton>
+                                        <MenuList>
+                                            <MenuItem /*onClick={goToProfile}*/>
+                                                Meu perfil
+                                            </MenuItem>
+                                            <MenuDivider />
+                                            <MenuItem onClick={logout}>Sair</MenuItem>
+                                        </MenuList>
+                                    </Menu>
+                                </Flex>
                             )}
                         </HStack>
                         {!userIsLogged && (
@@ -145,7 +169,7 @@ export default function Header() {
                                     bg={"#3948a1"}
                                     padding={0}
                                     href={"#"}
-                                    _hover={{bg: "pink.300",}}
+                                    _hover={{ bg: "pink.300", }}
                                 >
                                     <Link
                                         style={{ padding: "12px 15px", }}

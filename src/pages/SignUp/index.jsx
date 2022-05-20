@@ -91,7 +91,7 @@ export default function SignUp() {
                                     <Box width="100%">
                                         <FormControl id="dataNasc" isRequired>
                                             <FormLabel>Data de nasc.</FormLabel>
-                                            <Input type="date" {...register("data", { required: true })} />
+                                            <Input type="date" {...register("dataNascimento", { required: true })} />
 
                                         </FormControl>
                                     </Box>

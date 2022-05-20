@@ -20,13 +20,37 @@ export default function Login() {
     const { register, handleSubmit } = useForm();
     const toast = useToast()
 
+    const getUser = (email) => {
+        api.get("/conta")
+            .then((res) => {
+                const user = res.data.find((item) => {
+                    return item.email === email
+                })
+                if (user){
+                    let token = Math.random().toString(36);
+                    window.localStorage.setItem('token', JSON.stringify(token));
+                    window.localStorage.setItem('user', JSON.stringify(user));
+                    navigate(`/dashboard`)
+                }else{
+                    toast({
+                        title: 'Usuário ou senha incorretos!',
+                        status: 'error',
+                        duration: 6000,
+                        isClosable: true,
+                    })
+                }
+
+                console.log(user)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
     const goToLogin = (data) => {
         api.post("/login", data)
             .then((res) => {
-                let token = Math.random().toString(36);
-                window.localStorage.setItem('token', JSON.stringify(token));
-                navigate(`/dashboard`)
-                console.log(res)
+                getUser(data.email)
             })
             .catch((error) => {
                 toast({
