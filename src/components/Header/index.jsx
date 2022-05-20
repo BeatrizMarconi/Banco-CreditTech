@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { FiChevronDown } from "react-icons/fi";
 import {
@@ -25,6 +25,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
 import { isLogged } from "../../services/auth";
 import { PrivateNav } from "../PrivateNav";
+import { AppContext } from "../../context/appContext";
 
 export default function Header() {
 
@@ -33,6 +34,9 @@ export default function Header() {
     const goToLogin = () => navigate(`/login`);
     // const goToProfile = () => navigate(`/perfil`);
     const [userIsLogged] = isLogged();
+    const [saldo, setSaldo] = useContext(AppContext);
+
+    
 
     const logout = () => {
         window.localStorage.setItem("token", JSON.stringify(""));
@@ -84,7 +88,7 @@ export default function Header() {
                                 >
                                   <Text>Saldo</Text>
                                   <Text fontWeight={700} fontSize={"18px"}>
-                                    R$ 1.234,76
+                                    R$ {saldo}
                                   </Text>
                                 </Box>
                                 <Menu>
