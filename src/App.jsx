@@ -1,10 +1,11 @@
+import { AppContextProvider } from './context/appContext';
 import RoutesPages from './routes';
 
 export default function App() {
   return (
-    <div>
+    <AppContextProvider>
         <RoutesPages/>    
-    </div>
+    </AppContextProvider>
   );
 }
 

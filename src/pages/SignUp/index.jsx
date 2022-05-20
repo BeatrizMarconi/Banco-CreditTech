@@ -116,7 +116,7 @@ export default function SignUp() {
                                         mask="(99) 99999-9999"
                                         placeholder="(11) 99999-9999"
                                         type="text"
-                                        {...register("telefone", { required: true, pattern: /^(\(11\) (9\d{4})-\d{4})|((\(1[2-9]{1}\)|\([2-9]{1}\d{1}\)) [5-9]\d{3}-\d{4})$/ })} />
+                                        {...register("telefone", { required: true, pattern: /(\(?\d{2}\)?\s)?(\d{4,5}\-\d{4})/ })} />
                                     <FormErrorMessage>Preenchimento obrigatório.</FormErrorMessage>
 
                                 </FormControl>
