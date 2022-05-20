@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Dashboard from "../pages/Dashboard";
 import Operations from "../pages/Operations";
+import Profile from "../pages/Profile";
 
 export default function RoutesPages(){
     return(
@@ -19,6 +20,8 @@ export default function RoutesPages(){
                     <Route path="dashboard" element={<Dashboard/>}/>
 
                     <Route path="operations" element={<Operations/>}/>
+
+                    <Route path="profile" element={<Profile/>}/>
                 </Routes>
             </BrowserRouter>
         </>

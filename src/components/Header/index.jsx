@@ -34,7 +34,7 @@ export default function Header() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const navigate = useNavigate();
     const goToLogin = () => navigate(`/login`);
-    // const goToProfile = () => navigate(`/perfil`);
+    const goToProfile = () => navigate(`/profile`);
     const [userIsLogged] = isLogged();
     const [saldo, setSaldo] = useContext(AppContext);
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")));
@@ -131,7 +131,7 @@ export default function Header() {
                                             </HStack>
                                         </MenuButton>
                                         <MenuList>
-                                            <MenuItem /*onClick={goToProfile}*/>
+                                            <MenuItem onClick={goToProfile}>
                                                 Meu perfil
                                             </MenuItem>
                                             <MenuDivider />
