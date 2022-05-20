@@ -5,7 +5,6 @@ import {
     Stack,
     List,
     ListItem,
-    Button,
     useColorModeValue,
   } from '@chakra-ui/react';
 import moment from 'moment';
