@@ -39,11 +39,6 @@ export default function Header() {
     const [saldo, setSaldo] = useContext(AppContext);
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")));
 
-    const formatMoney = (valor) => {
-        let valorFormatado = parseFloat(valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}).replace(".", ",");
-        console.log(valorFormatado)
-    }
-
     const getFirstName = (nome) => {
         return nome.split(' ')[0].toUpperCase()
     }
@@ -64,7 +59,7 @@ export default function Header() {
 
                 })
         }
-    }, [])
+    }, )
 
     return (
         <>
@@ -112,7 +107,7 @@ export default function Header() {
                                         <Text>Saldo</Text>
                                         <Text fontWeight={700} fontSize={"18px"}>
                                             {Intl.NumberFormat('pt-br', {style: 'currency', currency: 'BRL'}).format(saldo)}
-                                            
+
                                         </Text>
                                     </Box>
                                     <Menu>
