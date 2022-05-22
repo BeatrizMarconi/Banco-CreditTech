@@ -31,6 +31,7 @@ export default function Operations() {
 
     const navigate = useNavigate();
     const [userIsLogged] = isLogged();
+    const [inputMoney, setInputMoney] = useState(0)
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")));
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -39,18 +40,24 @@ export default function Operations() {
     const navigateHome = () => navigate('/dashboard')
 
     const gotToOperation = (data) => {
-        api.post("/conta/operacao", { "remetente": user.cpf, "destinatario": data.destinatario, "valor": data.valor })
-            .then(() => {
-                onOpen()
-            })
-            .catch(() => {
-                Toast({
-                    title: 'Ops algo deu errado!',
-                    status: 'error',
-                    duration: 6000,
-                    isClosable: true,
-                })
-            })
+        console.log(data)
+        // const obj = {
+        //     remetente: user.cpf,
+        //     destinatario: data.destinatario,
+        //     valor: data.valor
+        // }
+        // api.post("/conta/operacao", obj)
+        //     .then(() => {
+        //         onOpen()
+        //     })
+        //     .catch(() => {
+        //         Toast({
+        //             title: 'Ops algo deu errado!',
+        //             status: 'error',
+        //             duration: 6000,
+        //             isClosable: true,
+        //         })
+        //     })
 
 
     }
@@ -94,11 +101,13 @@ export default function Operations() {
                                 <FormControl id="valor" isRequired>
                                     <FormLabel mt={7}>Valor:</FormLabel>
                                     <Input
-                                        // as={CurrencyInput}
+                                        as={CurrencyInput}
                                         placeholder="R$ 0,00"
                                         _placeholder={{ color: 'gray.500' }}
                                         type="text"
                                         width={300}
+                                        decimalSeparator=","
+                                        thousandSeparator="."
                                         {...register("valor")} />
                                 </FormControl>
 

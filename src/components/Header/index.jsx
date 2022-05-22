@@ -19,6 +19,7 @@ import {
     MenuList,
     MenuItem,
     MenuDivider,
+    Spinner,
 
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
@@ -48,7 +49,6 @@ export default function Header() {
     };
 
     useEffect(() => {
-
         if (user) {
             api.get(`/conta/saldo/${user.cpf}`)
                 .then((res) => {
@@ -104,9 +104,9 @@ export default function Header() {
                                         paddingRight={8}
                                     >
                                         <Text>Saldo</Text>
-                                        <Text fontWeight={700} fontSize={"18px"}>
-                                            {Intl.NumberFormat('pt-br', {style: 'currency', currency: 'BRL'}).format(saldo)}
 
+                                        <Text fontWeight={700} fontSize={"18px"}>
+                                            {saldo === 0 ? (<Spinner />) : (<>{Intl.NumberFormat('pt-br', {style: 'currency', currency: 'BRL'}).format(saldo)}</>)}
                                         </Text>
                                     </Box>
                                     <Menu>
