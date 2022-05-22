@@ -6,7 +6,10 @@ export const PrivateNav = () => {
         <>
             <Link to="/dashboard">Home</Link>
 
+            <Link to="/extract">Extrato</Link>
+
             <Link to="/operations">Transferência</Link>
+
         </>
     )
 }

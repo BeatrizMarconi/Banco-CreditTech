@@ -1,14 +1,16 @@
 import { Box, Container, Heading, Text } from "@chakra-ui/react";
 import Header from "../../components/Header";
+import TableMovements from "../../components/TableExtract";
 
-export default function Dashboard(){
-    return(
+export default function TableExtract() {
+    return (
         <>
             <Box>
                 <Header />
                 <Container maxW='960px'>
                     <Box marginTop={20} mb={10}>
-                        <Heading>Movimentações recentes</Heading>
+                        <Heading>Meu extrato</Heading>
+                        <Text>Listagem com todas as movimentações</Text>
                     </Box>
                     <Box>
                         <Box
@@ -18,7 +20,7 @@ export default function Dashboard(){
                             p={4}
                             borderRadius={8}>
 
-                            
+                            <TableMovements/>
                         </Box>
                     </Box>
                 </Container>
