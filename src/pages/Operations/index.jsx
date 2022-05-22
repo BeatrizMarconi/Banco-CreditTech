@@ -40,24 +40,24 @@ export default function Operations() {
     const navigateHome = () => navigate('/dashboard')
 
     const gotToOperation = (data) => {
-        console.log(data)
-        // const obj = {
-        //     remetente: user.cpf,
-        //     destinatario: data.destinatario,
-        //     valor: data.valor
-        // }
-        // api.post("/conta/operacao", obj)
-        //     .then(() => {
-        //         onOpen()
-        //     })
-        //     .catch(() => {
-        //         Toast({
-        //             title: 'Ops algo deu errado!',
-        //             status: 'error',
-        //             duration: 6000,
-        //             isClosable: true,
-        //         })
-        //     })
+        
+        const obj = {
+            remetente: user.cpf,
+            destinatario: data.destinatario,
+            valor: data.valor
+        }
+        api.post("/conta/operacao", obj)
+            .then(() => {
+                onOpen()
+            })
+            .catch(() => {
+                Toast({
+                    title: 'Ops algo deu errado!',
+                    status: 'error',
+                    duration: 6000,
+                    isClosable: true,
+                })
+            })
 
 
     }
@@ -101,13 +101,13 @@ export default function Operations() {
                                 <FormControl id="valor" isRequired>
                                     <FormLabel mt={7}>Valor:</FormLabel>
                                     <Input
-                                        as={CurrencyInput}
+                                        // as={CurrencyInput}
                                         placeholder="R$ 0,00"
                                         _placeholder={{ color: 'gray.500' }}
                                         type="text"
                                         width={300}
-                                        decimalSeparator=","
-                                        thousandSeparator="."
+                                        // decimalSeparator=","
+                                        // thousandSeparator="."
                                         {...register("valor")} />
                                 </FormControl>
 
