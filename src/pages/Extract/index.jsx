@@ -20,7 +20,7 @@ export default function TableExtract() {
                             p={4}
                             borderRadius={8}>
 
-                            <TableMovements/>
+                            <TableMovements initialValue={0} finalValue={-1}/>
                         </Box>
                     </Box>
                 </Container>

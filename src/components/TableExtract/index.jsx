@@ -4,7 +4,7 @@ import api from "../../services/api";
 import moment from 'moment';
 import formatMoney from "../../helpers/formatMoney";
 
-export default function TableExtract() {
+export default function TableExtract({initialValue, finalValue}) {
 
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")));
     const [extrato, setExtrato] = useState(0);
@@ -14,10 +14,10 @@ export default function TableExtract() {
     useEffect(() => {
         api.get(`/conta/extrato/${user.cpf}`)
             .then((res) => {
-                // const listaRecentes = res.data.operacoes.sort((a, b) => {
-                //     return a.data - b.data;
-                // });
-                setExtrato(res.data.operacoes)
+                const listaRecentes = res.data.operacoes
+                .sort((a, b) => new Date(b.data).getDate() - new Date(a.data).getDate())
+                .slice(initialValue, finalValue)
+                setExtrato(listaRecentes)
         
             })
             .catch(() => {
