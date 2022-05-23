@@ -16,7 +16,8 @@ import {
     Stack,
     Text,
     Toast,
-    useDisclosure
+    useDisclosure,
+    useToast
 } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -52,6 +53,7 @@ export default function Operations() {
     const cancelRef = React.useRef()
     const [inputMoney, setInputMoney] = useState(0)
     const [saldo, setSaldo] = useContext(AppContext);
+    const toast = useToast()
 
     const handleChange = (event, value, maskedValue) => {
         setInputMoney(value)
@@ -59,41 +61,45 @@ export default function Operations() {
 
     const navigateHome = () => navigate('/dashboard');
 
-    const gotToOperation = (data) => {
+    const getOperationData = (data) => {
 
         const obj = {
             remetente: user.cpf,
             destinatario: data.destinatario,
             valor: inputMoney
         }
-        api.post("/conta/operacao", obj)
-            .then(() => {
-                onOpen()
-                api.get(`/conta/saldo/${user.cpf}`)
-                    .then((res) => {
-                        setSaldo(res.data.saldo)
-                    })
-                    .catch(() => {
 
-                    })
+        if (inputMoney > saldo) {
+            toast({
+                title: 'Saldo insuficiente!',
+                status: 'error',
+                duration: 6000,
+                isClosable: true,
             })
-            .catch(() => {
-                Toast({
-                    title: 'Ops algo deu errado!',
-                    status: 'error',
-                    duration: 6000,
-                    isClosable: true,
+        }else{
+            api.post("/conta/operacao", obj)
+                .then(() => {
+                    onOpen()
+                    api.get(`/conta/saldo/${user.cpf}`)
+                        .then((res) => {
+                            setSaldo(res.data.saldo)
+                        })
+                        .catch(() => {
+
+                        })
                 })
-            })
-
+                .catch(() => {
+                    toast({
+                        title: 'Ops algo deu errado!',
+                        status: 'error',
+                        duration: 6000,
+                        isClosable: true,
+                    })
+                })
+        }
 
     }
 
-    useEffect(() => {
-        if (userIsLogged === "") {
-            navigate(`/login`);
-        }
-    });
     return (
         <>
             <Box>
@@ -111,7 +117,7 @@ export default function Operations() {
                             p={4}
                             borderRadius={8}>
 
-                            <form onSubmit={handleSubmit(gotToOperation)}>
+                            <form onSubmit={handleSubmit(getOperationData)}>
 
                                 <FormControl id="destinatario" isInvalid={errors.destinatario}>
                                     <FormLabel mt={7}>CPF destinatário: <span style={{ color: "#e53e3e" }}>*</span></FormLabel>

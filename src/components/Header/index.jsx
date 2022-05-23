@@ -104,7 +104,8 @@ export default function Header() {
                                     >
                                         <Text>Saldo</Text>
 
-                                        <Text fontWeight={700} fontSize={"18px"}>
+                                        <Text fontWeight={700} fontSize={"18px"}
+                                        color={saldo < 0  ? 'red' : '#000'}>
                                             {saldo === 0 ? (<Spinner />) : (<>{formatMoney(saldo)}</>)}
                                         </Text>
                                     </Box>
