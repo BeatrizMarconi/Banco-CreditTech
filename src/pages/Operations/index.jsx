@@ -25,13 +25,11 @@ import Header from "../../components/Header";
 import { isLogged } from "../../services/auth";
 import InputMask from "react-input-mask";
 import api from "../../services/api";
-import CurrencyInput from "react-currency-input";
 
 export default function Operations() {
 
     const navigate = useNavigate();
     const [userIsLogged] = isLogged();
-    const [inputMoney, setInputMoney] = useState(0)
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")));
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -101,13 +99,10 @@ export default function Operations() {
                                 <FormControl id="valor" isRequired>
                                     <FormLabel mt={7}>Valor:</FormLabel>
                                     <Input
-                                        // as={CurrencyInput}
                                         placeholder="R$ 0,00"
                                         _placeholder={{ color: 'gray.500' }}
                                         type="text"
                                         width={300}
-                                        // decimalSeparator=","
-                                        // thousandSeparator="."
                                         {...register("valor")} />
                                 </FormControl>
 
