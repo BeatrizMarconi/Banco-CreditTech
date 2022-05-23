@@ -18,13 +18,29 @@ import {
     Toast,
     useDisclosure
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import { isLogged } from "../../services/auth";
 import InputMask from "react-input-mask";
 import api from "../../services/api";
+import IntlCurrencyInput from "react-intl-currency-input";
+import { AppContext } from "../../context/appContext";
+
+const currencyConfig = {
+    locale: "pt-BR",
+    formats: {
+        number: {
+            BRL: {
+                style: "currency",
+                currency: "BRL",
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+            },
+        },
+    },
+};
 
 export default function Operations() {
 
@@ -34,19 +50,32 @@ export default function Operations() {
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")));
     const { isOpen, onOpen, onClose } = useDisclosure()
     const cancelRef = React.useRef()
+    const [inputMoney, setInputMoney] = useState(0)
+    const [saldo, setSaldo] = useContext(AppContext);
 
-    const navigateHome = () => navigate('/dashboard')
+    const handleChange = (event, value, maskedValue) => {
+        setInputMoney(value)
+    }
+
+    const navigateHome = () => navigate('/dashboard');
 
     const gotToOperation = (data) => {
-        
+
         const obj = {
             remetente: user.cpf,
             destinatario: data.destinatario,
-            valor: data.valor
+            valor: inputMoney
         }
         api.post("/conta/operacao", obj)
             .then(() => {
                 onOpen()
+                api.get(`/conta/saldo/${user.cpf}`)
+                    .then((res) => {
+                        setSaldo(res.data.saldo)
+                    })
+                    .catch(() => {
+
+                    })
             })
             .catch(() => {
                 Toast({
@@ -99,11 +128,13 @@ export default function Operations() {
                                 <FormControl id="valor" isRequired>
                                     <FormLabel mt={7}>Valor:</FormLabel>
                                     <Input
+                                        as={IntlCurrencyInput}
                                         placeholder="R$ 0,00"
                                         _placeholder={{ color: 'gray.500' }}
                                         type="text"
                                         width={300}
-                                        {...register("valor")} />
+                                        currency="BRL" config={currencyConfig}
+                                        onChange={handleChange} />
                                 </FormControl>
 
                                 <Stack spacing={6}>

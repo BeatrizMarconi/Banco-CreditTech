@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { FiChevronDown } from "react-icons/fi";
 import {
@@ -27,6 +27,7 @@ import logo from "../../assets/logo.jpg";
 import { isLogged } from "../../services/auth";
 import { PrivateNav } from "../PrivateNav";
 import api from "../../services/api";
+import { AppContext } from "../../context/appContext";
 
 
 export default function Header() {
@@ -36,7 +37,7 @@ export default function Header() {
     const goToLogin = () => navigate(`/login`);
     const goToProfile = () => navigate(`/profile`);
     const [userIsLogged] = isLogged();
-    const [saldo, setSaldo] = useState(0);
+    const [saldo, setSaldo] = useContext(AppContext);
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")));
 
     const getFirstName = (nome) => {
@@ -58,7 +59,7 @@ export default function Header() {
 
                 })
         }
-    },[])
+    }, [])
 
     return (
         <>
