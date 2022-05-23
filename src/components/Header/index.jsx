@@ -28,6 +28,8 @@ import { isLogged } from "../../services/auth";
 import { PrivateNav } from "../PrivateNav";
 import api from "../../services/api";
 import { AppContext } from "../../context/appContext";
+import formatMoney from "../../helpers/formatMoney";
+import getFirstName from "../../helpers/getFirstName";
 
 
 export default function Header() {
@@ -39,10 +41,6 @@ export default function Header() {
     const [userIsLogged] = isLogged();
     const [saldo, setSaldo] = useContext(AppContext);
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")));
-
-    const getFirstName = (nome) => {
-        return nome.split(' ')[0].toUpperCase()
-    }
 
     const logout = () => {
         window.localStorage.clear();
@@ -107,7 +105,7 @@ export default function Header() {
                                         <Text>Saldo</Text>
 
                                         <Text fontWeight={700} fontSize={"18px"}>
-                                            {saldo === 0 ? (<Spinner />) : (<>{Intl.NumberFormat('pt-br', {style: 'currency', currency: 'BRL'}).format(saldo)}</>)}
+                                            {saldo === 0 ? (<Spinner />) : (<>{formatMoney(saldo)}</>)}
                                         </Text>
                                     </Box>
                                     <Menu>

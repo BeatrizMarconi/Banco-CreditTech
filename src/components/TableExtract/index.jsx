@@ -2,6 +2,7 @@ import { Badge, Box, Container, Heading, Spinner, Table, TableContainer, Tbody, 
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import moment from 'moment';
+import formatMoney from "../../helpers/formatMoney";
 
 export default function TableExtract() {
 
@@ -49,7 +50,7 @@ export default function TableExtract() {
 
                                 <Tr key={index}>
                                     <Td>{moment(listaExtrato.data).format('DD/MM/YYYY - HH:mm:ss')}</Td>
-                                    <Td>R$ {Intl.NumberFormat('pt-br', {style: 'currency', currency: 'BRL'}).format(listaExtrato.valor)}</Td>
+                                    <Td>R$ {formatMoney(listaExtrato.valor)}</Td>
                                     <Td>
                                         <Badge colorScheme={(listaExtrato.tipo === 'SAIDA') ? 'red' : 'green'}>{listaExtrato.tipo}</Badge>
                                     </Td>
