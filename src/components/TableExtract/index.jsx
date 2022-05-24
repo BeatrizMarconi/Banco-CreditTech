@@ -8,7 +8,7 @@ export default function TableExtract({initialValue, finalValue}) {
 
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")));
     const [extrato, setExtrato] = useState(0);
-    const [ExtratoLoad, setExtratoLoadsetSaldoLoad] = useState(true);
+    const [ExtratoLoad, setExtratoLoad] = useState(true);
     
     
 
