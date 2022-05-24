@@ -18,7 +18,7 @@ export default function Profile() {
         <>
             <Box>
                 <Header />
-                <Container maxW='960px'>
+                <Container maxW={"8xl"}>
                     <Box marginTop={20} mb={10}>
                         <Heading>Meus dados</Heading>
                         <Text>Dados pessoais</Text>

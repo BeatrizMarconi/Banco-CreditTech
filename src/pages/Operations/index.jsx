@@ -77,7 +77,7 @@ export default function Operations() {
                 position: 'top',
                 isClosable: true,
             })
-        }else if(inputMoney == 0){
+        }else if(inputMoney === 0){
             toast({
                 title: 'Por favor, digite um valor!',
                 status: 'error',
@@ -116,7 +116,7 @@ export default function Operations() {
         <>
             <Box>
                 <Header />
-                <Container maxW='960px'>
+                <Container maxW={"8xl"}>
                     <Box marginTop={20} mb={10}>
                         <Heading>Transferência</Heading>
                         <Text>Transferir valores para outras contas</Text>

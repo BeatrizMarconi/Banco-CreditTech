@@ -17,7 +17,7 @@ export default function TableExtract() {
         <>
             <Box>
                 <Header />
-                <Container maxW='960px'>
+                <Container maxW={"8xl"}>
                     <Box marginTop={20} mb={10}>
                         <Heading>Meu extrato</Heading>
                         <Text>Listagem com todas as movimentações</Text>

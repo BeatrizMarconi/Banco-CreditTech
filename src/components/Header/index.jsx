@@ -41,6 +41,7 @@ export default function Header() {
     const [userIsLogged] = isLogged();
     const [saldo, setSaldo] = useContext(AppContext);
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")));
+    const [saldoLoad, setSaldoLoad] = useState(true);
 
     const logout = () => {
         window.localStorage.clear();
@@ -52,6 +53,7 @@ export default function Header() {
             api.get(`/conta/saldo/${user.cpf}`)
                 .then((res) => {
                     setSaldo(res.data.saldo)
+                    setSaldoLoad(false)
                 })
                 .catch(() => {
 
@@ -106,7 +108,7 @@ export default function Header() {
 
                                         <Text fontWeight={700} fontSize={"18px"}
                                         color={saldo < 0  ? 'red' : '#000'}>
-                                            {saldo === 0 ? (<Spinner />) : (<>{formatMoney(saldo)}</>)}
+                                            {saldoLoad ? (<Spinner />) : (<>{formatMoney(saldo)}</>)}
                                         </Text>
                                     </Box>
                                     <Menu>

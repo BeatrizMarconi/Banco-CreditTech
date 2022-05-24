@@ -18,11 +18,11 @@ export default function TableExtract({initialValue, finalValue}) {
                 
                 if(finalValue > 0){
                     listaRecentes = res.data.operacoes
-                    .sort((a, b) => new Date(b.data).getDate() - new Date(a.data).getDate())
+                    .sort((a, b) => new Date(b.data)- new Date(a.data))
                     .slice(initialValue, finalValue)
                 }else{
                     listaRecentes = res.data.operacoes
-                    .sort((a, b) => new Date(b.data).getDate() - new Date(a.data).getDate())
+                    .sort((a, b) => new Date(b.data) - new Date(a.data))
                 }
 
 
@@ -59,7 +59,7 @@ export default function TableExtract({initialValue, finalValue}) {
 
                                 <Tr key={index}>
                                     <Td>{moment(listaExtrato.data).format('DD/MM/YYYY - HH:mm:ss')}</Td>
-                                    <Td>R$ {formatMoney(listaExtrato.valor)}</Td>
+                                    <Td color={listaExtrato.tipo === 'SAIDA' ? 'red' : '#000'}>{listaExtrato.tipo === 'SAIDA' ? (<Text>-{formatMoney(listaExtrato.valor)}</Text>) : (<Text>{formatMoney(listaExtrato.valor)}</Text>)}</Td>
                                     <Td>
                                         <Badge colorScheme={(listaExtrato.tipo === 'SAIDA') ? 'red' : 'green'}>{listaExtrato.tipo}</Badge>
                                     </Td>
