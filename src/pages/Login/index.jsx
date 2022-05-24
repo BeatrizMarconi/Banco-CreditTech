@@ -36,6 +36,7 @@ export default function Login() {
                         title: 'Usuário ou senha incorretos!',
                         status: 'error',
                         duration: 6000,
+                        position: 'top',
                         isClosable: true,
                     })
                 }

@@ -38,6 +38,7 @@ export default function SignUp() {
                     title: 'Usuário cadastrado com sucesso!',
                     status: 'success',
                     duration: 4000,
+                    position: 'top',
                     isClosable: true,
                 })
                 navigate(`/login`)
@@ -48,6 +49,7 @@ export default function SignUp() {
                     title: 'Erro ao cadastrar usuário!',
                     status: 'error',
                     duration: 6000,
+                    position: 'top',
                     isClosable: true,
                 })
                 console.log(error)

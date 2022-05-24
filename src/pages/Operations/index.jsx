@@ -74,13 +74,15 @@ export default function Operations() {
                 title: 'Saldo insuficiente!',
                 status: 'error',
                 duration: 6000,
+                position: 'top',
                 isClosable: true,
             })
         }else if(inputMoney == 0){
             toast({
                 title: 'Por favor, digite um valor!',
-                status: 'info',
+                status: 'error',
                 duration: 6000,
+                position: 'top',
                 isClosable: true,
             })
             return false
@@ -102,6 +104,7 @@ export default function Operations() {
                         title: 'Ops algo deu errado!',
                         status: 'error',
                         duration: 6000,
+                        position: 'top',
                         isClosable: true,
                     })
                 })
