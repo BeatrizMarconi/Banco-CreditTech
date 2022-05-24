@@ -8,6 +8,7 @@ export default function TableExtract({initialValue, finalValue}) {
 
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")));
     const [extrato, setExtrato] = useState(0);
+    const [saldoLoad, setSaldoLoad] = useState(true);
     
     
 
@@ -27,6 +28,7 @@ export default function TableExtract({initialValue, finalValue}) {
 
 
                 setExtrato(listaRecentes)
+                setSaldoLoad(false)
         
             })
             .catch(() => {
@@ -49,7 +51,7 @@ export default function TableExtract({initialValue, finalValue}) {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {extrato === 0 ? (
+                        {saldoLoad ? (
                             <Tr>
                                 <Td><Spinner /></Td>
                             </Tr>)

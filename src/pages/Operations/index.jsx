@@ -77,7 +77,7 @@ export default function Operations() {
                 position: 'top',
                 isClosable: true,
             })
-        }else if(inputMoney === 0){
+        } else if (inputMoney === 0) {
             toast({
                 title: 'Por favor, digite um valor!',
                 status: 'error',
@@ -87,7 +87,7 @@ export default function Operations() {
             })
             return false
         }
-        else{
+        else {
             api.post("/conta/operacao", obj)
                 .then(() => {
                     onOpen()
@@ -138,7 +138,8 @@ export default function Operations() {
                                         mask="999.999.999-99"
                                         placeholder="___.___.___-__"
                                         type="text"
-                                        width={300}
+                                        width={'100%'}
+                                        maxW={'xl'}
                                         {...register("destinatario", { required: true, pattern: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/ })} />
                                     <FormErrorMessage>Preenchimento obrigatório.</FormErrorMessage>
                                 </FormControl>
@@ -150,7 +151,8 @@ export default function Operations() {
                                         placeholder="R$ 0,00"
                                         _placeholder={{ color: 'gray.500' }}
                                         type="text"
-                                        width={300}
+                                        width={'100%'}
+                                        maxW={'xl'}
                                         currency="BRL" config={currencyConfig}
                                         onChange={handleChange} />
                                 </FormControl>
@@ -161,7 +163,7 @@ export default function Operations() {
                                         color={'white'}
                                         _hover={{ bg: 'blue.500', }}
                                         mt={7}
-                                        width={300}
+                                        width={200}
                                         type="submit">
                                         Enviar
                                     </Button>
