@@ -14,9 +14,18 @@ export default function TableExtract({initialValue, finalValue}) {
     useEffect(() => {
         api.get(`/conta/extrato/${user.cpf}`)
             .then((res) => {
-                const listaRecentes = res.data.operacoes
-                .sort((a, b) => new Date(b.data).getDate() - new Date(a.data).getDate())
-                .slice(initialValue, finalValue)
+                let listaRecentes = null;
+                
+                if(finalValue > 0){
+                    listaRecentes = res.data.operacoes
+                    .sort((a, b) => new Date(b.data).getDate() - new Date(a.data).getDate())
+                    .slice(initialValue, finalValue)
+                }else{
+                    listaRecentes = res.data.operacoes
+                    .sort((a, b) => new Date(b.data).getDate() - new Date(a.data).getDate())
+                }
+
+
                 setExtrato(listaRecentes)
         
             })

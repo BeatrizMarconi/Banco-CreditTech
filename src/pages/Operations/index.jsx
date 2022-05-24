@@ -76,7 +76,16 @@ export default function Operations() {
                 duration: 6000,
                 isClosable: true,
             })
-        }else{
+        }else if(inputMoney == 0){
+            toast({
+                title: 'Por favor, digite um valor!',
+                status: 'info',
+                duration: 6000,
+                isClosable: true,
+            })
+            return false
+        }
+        else{
             api.post("/conta/operacao", obj)
                 .then(() => {
                     onOpen()
