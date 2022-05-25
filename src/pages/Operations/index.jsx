@@ -52,7 +52,7 @@ export default function Operations() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const cancelRef = React.useRef()
     const [inputMoney, setInputMoney] = useState(0)
-    const [saldo, setSaldo] = useContext(AppContext);
+    const {saldo, setSaldo} = useContext(AppContext);
     const toast = useToast()
 
     const handleChange = (event, value, maskedValue) => {

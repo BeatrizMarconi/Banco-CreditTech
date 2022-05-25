@@ -39,7 +39,7 @@ export default function Header() {
     const goToLogin = () => navigate(`/login`);
     const goToProfile = () => navigate(`/profile`);
     const [userIsLogged] = isLogged();
-    const [saldo, setSaldo] = useContext(AppContext);
+    const {saldo, setSaldo} = useContext(AppContext);
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")));
     const [saldoLoad, setSaldoLoad] = useState(true);
 

@@ -11,7 +11,7 @@ import { AppContext } from "../../context/appContext";
 
 export default function TableExtract() {
 
-    const [setMonthSelect] = useContext(AppContext);
+    const {monthSelect, setMonthSelect} = useContext(AppContext);
 
     const buscaExtratoMes = (e) => {
         setMonthSelect(e.target.value)

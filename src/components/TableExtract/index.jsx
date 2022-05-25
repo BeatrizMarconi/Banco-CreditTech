@@ -10,12 +10,14 @@ export default function TableExtract({ initialValue, finalValue }) {
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")));
     const [extrato, setExtrato] = useState(0);
     const [ExtratoLoad, setExtratoLoad] = useState(true);
-    const [monthSelect, setMonthSelect] = useContext(AppContext);
+    const {monthSelect, setMonthSelect} = useContext(AppContext);
 
 
     useEffect(() => {
-        if (!monthSelect) {
-            api.get(`/conta/extrato/${user.cpf}`)
+        
+            const query = `?mes=${monthSelect}`;
+
+            api.get(`/conta/extrato/${user.cpf}${(monthSelect) ? query : ''}`)
                 .then((res) => {
                     let listaRecentes = null;
 
@@ -36,29 +38,6 @@ export default function TableExtract({ initialValue, finalValue }) {
                 .catch(() => {
                     console.log("vish deu ruim")
                 })
-        }else{
-            api.get(`/conta/extrato/${user.cpf}?${monthSelect}`)
-                .then((res) => {
-                    let listaRecentes = null;
-
-                    if (finalValue > 0) {
-                        listaRecentes = res.data.operacoes
-                            .sort((a, b) => new Date(b.data) - new Date(a.data))
-                            .slice(initialValue, finalValue)
-                    } else {
-                        listaRecentes = res.data.operacoes
-                            .sort((a, b) => new Date(b.data) - new Date(a.data))
-                    }
-
-
-                    setExtrato(listaRecentes)
-                    setExtratoLoad(false)
-
-                })
-                .catch(() => {
-                    console.log("vish deu ruim")
-                })
-        }
 
     }, [monthSelect])
 
