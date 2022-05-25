@@ -10,34 +10,34 @@ export default function TableExtract({ initialValue, finalValue }) {
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")));
     const [extrato, setExtrato] = useState(0);
     const [ExtratoLoad, setExtratoLoad] = useState(true);
-    const {monthSelect, setMonthSelect} = useContext(AppContext);
+    const { monthSelect, setMonthSelect } = useContext(AppContext);
 
 
     useEffect(() => {
-        
-            const query = `?mes=${monthSelect}`;
 
-            api.get(`/conta/extrato/${user.cpf}${(monthSelect) ? query : ''}`)
-                .then((res) => {
-                    let listaRecentes = null;
+        const query = `?mes=${monthSelect}`;
 
-                    if (finalValue > 0) {
-                        listaRecentes = res.data.operacoes
-                            .sort((a, b) => new Date(b.data) - new Date(a.data))
-                            .slice(initialValue, finalValue)
-                    } else {
-                        listaRecentes = res.data.operacoes
-                            .sort((a, b) => new Date(b.data) - new Date(a.data))
-                    }
+        api.get(`/conta/extrato/${user.cpf}${(monthSelect) ? query : ''}`)
+            .then((res) => {
+                let listaRecentes = null;
+
+                if (finalValue > 0) {
+                    listaRecentes = res.data.operacoes
+                        .sort((a, b) => new Date(b.data) - new Date(a.data))
+                        .slice(initialValue, finalValue)
+                } else {
+                    listaRecentes = res.data.operacoes
+                        .sort((a, b) => new Date(b.data) - new Date(a.data))
+                }
 
 
-                    setExtrato(listaRecentes)
-                    setExtratoLoad(false)
+                setExtrato(listaRecentes)
+                setExtratoLoad(false)
 
-                })
-                .catch(() => {
-                    console.log("vish deu ruim")
-                })
+            })
+            .catch(() => {
+                console.log("vish deu ruim")
+            })
 
     }, [monthSelect])
 
@@ -55,24 +55,30 @@ export default function TableExtract({ initialValue, finalValue }) {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {ExtratoLoad ? (
-                            <Tr>
-                                <Td><Spinner /></Td>
-                            </Tr>)
-                            :
-                            (
-                                extrato.map((listaExtrato, index) => (
+                        {ExtratoLoad && <Tr><Td colSpan={3} textAlign="center" py={10}><Spinner /></Td></Tr>}
+                        {!ExtratoLoad &&
+                            <>
+                                {extrato.length > 0 ?
+                                    (
+                                        extrato.map((listaExtrato, index) => (
 
-                                    <Tr key={index}>
-                                        <Td>{moment(listaExtrato.data).format('DD/MM/YYYY - HH:mm:ss')}</Td>
-                                        <Td color={listaExtrato.tipo === 'SAIDA' ? 'red' : '#000'}>{listaExtrato.tipo === 'SAIDA' ? (<Text>-{formatMoney(listaExtrato.valor)}</Text>) : (<Text>{formatMoney(listaExtrato.valor)}</Text>)}</Td>
-                                        <Td>
-                                            <Badge colorScheme={(listaExtrato.tipo === 'SAIDA') ? 'red' : 'green'}>{listaExtrato.tipo}</Badge>
-                                        </Td>
-                                    </Tr>
+                                            <Tr key={index}>
+                                                <Td>{moment(listaExtrato.data).format('DD/MM/YYYY - HH:mm:ss')}</Td>
+                                                <Td color={listaExtrato.tipo === 'SAIDA' ? 'red' : '#000'}>{listaExtrato.tipo === 'SAIDA' ? (<Text>-{formatMoney(listaExtrato.valor)}</Text>) : (<Text>{formatMoney(listaExtrato.valor)}</Text>)}</Td>
+                                                <Td>
+                                                    <Badge colorScheme={(listaExtrato.tipo === 'SAIDA') ? 'red' : 'green'}>{listaExtrato.tipo}</Badge>
+                                                </Td>
+                                            </Tr>
 
-                                ))
-                            )}
+                                        ))
+                                    ) :
+                                    (
+                                        <Tr><Td colSpan={3} textAlign="center" py={10}><Text>Nenhum dado encontrado.</Text></Td></Tr>
+                                    )
+                                }
+
+                            </>
+                        }
 
                     </Tbody>
                 </Table>
