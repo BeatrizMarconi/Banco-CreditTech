@@ -102,10 +102,10 @@ export default function Login() {
                             <Stack spacing={10}>
                                 <Button
                                     marginTop={5}
-                                    bg={"blue.400"}
+                                    bg={"#3948a1"}
                                     color={"white"}
                                     _hover={{
-                                        bg: "blue.500",
+                                        bg: "pink.300",
                                     }}
                                     type="submit"
                                 >
@@ -115,7 +115,7 @@ export default function Login() {
                             <Stack pt={6}>
                                 <Text align={"center"}>
                                     Não possui uma conta?{" "}
-                                    <Link style={{ color: "#4299e1" }} to="/signUp">
+                                    <Link style={{ color: "#3948a1" }} to="/signUp">
                                         Cadastre-se
                                     </Link>
                                 </Text>

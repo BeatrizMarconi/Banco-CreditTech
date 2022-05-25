@@ -4,13 +4,17 @@ import { Box,
     Heading, 
     Select, 
     Text } from "@chakra-ui/react";
+import { useContext } from "react";
 import Header from "../../components/Header";
 import TableMovements from "../../components/TableExtract";
+import { AppContext } from "../../context/appContext";
 
 export default function TableExtract() {
 
-    const buscaExtratoMes = () => {
+    const [setMonthSelect] = useContext(AppContext);
 
+    const buscaExtratoMes = (e) => {
+        setMonthSelect(e.target.value)
     }
 
     return (
@@ -26,18 +30,18 @@ export default function TableExtract() {
                     <Box>
                         <FormLabel>Buscar por mês:</FormLabel>
                         <Select onChange={buscaExtratoMes} width={200} placeholder='Escolha o mês'>
-                            <option value="">Janeiro</option>
-                            <option value="">Fevereiro</option>
-                            <option value="">Março</option>
-                            <option value="">Abril</option>
-                            <option value="">Maio</option>
-                            <option value="">Junho</option>
-                            <option value="">Julho</option>
-                            <option value="">Agosto</option>
-                            <option value="">Setembro</option>
-                            <option value="">Outubro</option>
-                            <option value="">Novembro</option>
-                            <option value="">Dezembro</option>
+                            <option value="01">Janeiro</option>
+                            <option value="02">Fevereiro</option>
+                            <option value="03">Março</option>
+                            <option value="04">Abril</option>
+                            <option value="05">Maio</option>
+                            <option value="06">Junho</option>
+                            <option value="07">Julho</option>
+                            <option value="08">Agosto</option>
+                            <option value="09">Setembro</option>
+                            <option value="10">Outubro</option>
+                            <option value="11">Novembro</option>
+                            <option value="12">Dezembro</option>
                         </Select>
                     </Box>
 

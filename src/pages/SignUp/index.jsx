@@ -142,9 +142,9 @@ export default function SignUp() {
                                     <Button
                                         loadingText="Submitting"
                                         size="lg"
-                                        bg={"blue.400"}
+                                        bg={"#3948a1"}
                                         color={"white"}
-                                        _hover={{ bg: "blue.500" }}
+                                        _hover={{ bg: "pink.300" }}
                                         type="submit"
                                     >
                                         Cadastrar
@@ -153,7 +153,7 @@ export default function SignUp() {
                                 <Stack pt={6}>
                                     <Text align={"center"}>
                                         Já possui uma conta?{" "}
-                                        <Link style={{ color: "#4299e1" }} to="/login">
+                                        <Link style={{ color: "#3948a1" }} to="/login">
                                             Acesse
                                         </Link>
                                     </Text>
