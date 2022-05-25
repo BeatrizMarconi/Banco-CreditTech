@@ -29,7 +29,7 @@ export default function TableExtract() {
 
                     <Box>
                         <FormLabel>Buscar por mês:</FormLabel>
-                        <Select onChange={buscaExtratoMes} width={200} placeholder='Escolha o mês'>
+                        <Select onChange={buscaExtratoMes} width={200} placeholder='Todos'>
                             <option value="01">Janeiro</option>
                             <option value="02">Fevereiro</option>
                             <option value="03">Março</option>

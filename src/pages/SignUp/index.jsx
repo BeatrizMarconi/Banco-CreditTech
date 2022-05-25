@@ -123,7 +123,7 @@ export default function SignUp() {
 
                                 </FormControl>
                                 <FormControl id="password" isRequired>
-                                    <FormLabel>Password</FormLabel>
+                                    <FormLabel>Senha</FormLabel>
                                     <InputGroup>
                                         <Input type={showPassword ? "text" : "password"}
                                             {...register("senha", { required: true })} />
