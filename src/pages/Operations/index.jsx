@@ -186,7 +186,7 @@ export default function Operations() {
                         </AlertDialogHeader>
 
                         <AlertDialogBody>
-                            Deseja realizar uma nova transferência?.
+                            Deseja realizar uma nova transferência?
                         </AlertDialogBody>
 
                         <AlertDialogFooter>

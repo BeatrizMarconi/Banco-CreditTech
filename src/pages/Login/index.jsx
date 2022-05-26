@@ -62,6 +62,7 @@ export default function Login() {
                 })
                 console.log(error)
             });
+            
     };
 
     return (
@@ -88,6 +89,7 @@ export default function Login() {
 
                                 <Input
                                     type={"email"}
+                                    placeholder="Email"
                                     {...register("email", { required: true })}
                                 />
 
@@ -96,6 +98,7 @@ export default function Login() {
                                 <FormLabel>Senha</FormLabel>
                                 <Input
                                     type="password"
+                                    placeholder="Senha"
                                     {...register("senha", { required: true })}
                                 />
                             </FormControl>

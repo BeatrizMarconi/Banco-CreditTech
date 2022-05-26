@@ -4,12 +4,19 @@ import TableExtract from "../../components/TableExtract";
 import { MdAttachMoney } from "react-icons/md";
 import { FaExchangeAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../../context/appContext";
 
 export default function Dashboard() {
 
     const navigate = useNavigate();
     const goToExtract = () => navigate(`/extract`);
     const goToOperations = () => navigate(`/operations`);
+    const {monthSelect, setMonthSelect} = useContext(AppContext);
+
+    useEffect(()=>{
+        setMonthSelect(null)
+    },[])
 
     return (
         <>
