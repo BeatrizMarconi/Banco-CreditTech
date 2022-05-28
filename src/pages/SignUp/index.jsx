@@ -27,11 +27,13 @@ export default function SignUp() {
 
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
-    // const [error, setError] = useState(true);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const toast = useToast()
+    const [loading, setLoading] = useState(false);
+
 
     const goToSignUp = (data) => {
+        setLoading(true);
         api.post("/conta", data)
             .then((res) => {
                 toast({
@@ -42,7 +44,7 @@ export default function SignUp() {
                     isClosable: true,
                 })
                 navigate(`/login`)
-                console.log(res)
+                setLoading(false);
             })
             .catch((error) => {
                 toast({
@@ -52,7 +54,7 @@ export default function SignUp() {
                     position: 'top',
                     isClosable: true,
                 })
-                console.log(error)
+                setLoading(false);
             });
 
     }
@@ -146,6 +148,7 @@ export default function SignUp() {
                                         color={"white"}
                                         _hover={{ bg: "pink.300" }}
                                         type="submit"
+                                        disabled={loading}
                                     >
                                         Cadastrar
                                     </Button>

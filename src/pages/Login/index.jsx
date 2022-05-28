@@ -11,7 +11,8 @@ import {
     useColorModeValue,
     useToast,
     InputGroup,
-    InputRightElement
+    InputRightElement,
+    Spinner
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -25,6 +26,7 @@ export default function Login() {
     const { register, handleSubmit } = useForm();
     const toast = useToast()
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const getUser = (email) => {
         api.get("/conta")
@@ -55,9 +57,11 @@ export default function Login() {
     }
 
     const goToLogin = (data) => {
+        setLoading(true)
         api.post("/login", data)
             .then((res) => {
                 getUser(data.email)
+                setLoading(false)
             })
             .catch((error) => {
                 toast({
@@ -66,7 +70,7 @@ export default function Login() {
                     duration: 6000,
                     isClosable: true,
                 })
-                console.log(error)
+                setLoading(false);
             });
 
     };
@@ -127,6 +131,7 @@ export default function Login() {
                                         bg: "pink.300",
                                     }}
                                     type="submit"
+                                   disabled={loading}
                                 >
                                     Acessar
                                 </Button>
