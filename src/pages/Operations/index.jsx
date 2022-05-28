@@ -15,11 +15,10 @@ import {
     Input,
     Stack,
     Text,
-    Toast,
     useDisclosure,
     useToast
 } from "@chakra-ui/react";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
@@ -46,7 +45,6 @@ const currencyConfig = {
 export default function Operations() {
 
     const navigate = useNavigate();
-    const [userIsLogged] = isLogged();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")));
     const { isOpen, onOpen, onClose } = useDisclosure()
