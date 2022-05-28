@@ -9,16 +9,22 @@ import {
     Heading,
     Text,
     useColorModeValue,
-    useToast
+    useToast,
+    InputGroup,
+    InputRightElement
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import api from "../../services/api";
+import { useState } from "react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 export default function Login() {
+
     const navigate = useNavigate();
     const { register, handleSubmit } = useForm();
     const toast = useToast()
+    const [showPassword, setShowPassword] = useState(false);
 
     const getUser = (email) => {
         api.get("/conta")
@@ -26,12 +32,12 @@ export default function Login() {
                 const user = res.data.find((item) => {
                     return item.email === email
                 })
-                if (user){
+                if (user) {
                     let token = Math.random().toString(36);
                     window.localStorage.setItem('token', JSON.stringify(token));
                     window.localStorage.setItem('user', JSON.stringify(user));
                     navigate(`/dashboard`)
-                }else{
+                } else {
                     toast({
                         title: 'Usuário ou senha incorretos!',
                         status: 'error',
@@ -62,7 +68,7 @@ export default function Login() {
                 })
                 console.log(error)
             });
-            
+
     };
 
     return (
@@ -96,11 +102,21 @@ export default function Login() {
                             </FormControl>
                             <FormControl id="password" isRequired>
                                 <FormLabel>Senha</FormLabel>
-                                <Input
-                                    type="password"
-                                    placeholder="Senha"
-                                    {...register("senha", { required: true })}
-                                />
+                                <InputGroup>
+                                    <Input
+                                        type={showPassword ? "text" : "password"}
+                                        placeholder="Senha"
+                                        {...register("senha", { required: true })}
+                                    />
+                                    <InputRightElement h={"full"}>
+                                            <Button
+                                                variant={"ghost"}
+                                                onClick={() =>
+                                                    setShowPassword((showPassword) => !showPassword)}>
+                                                {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                                            </Button>
+                                        </InputRightElement>
+                                </InputGroup>
                             </FormControl>
                             <Stack spacing={10}>
                                 <Button
