@@ -131,9 +131,8 @@ export default function Login() {
                                         bg: "pink.300",
                                     }}
                                     type="submit"
-                                   disabled={loading}
-                                >
-                                    Acessar
+                                   disabled={loading}>
+                                    {loading ? <Spinner/> : 'Acessar'}
                                 </Button>
                             </Stack>
                             <Stack pt={6}>

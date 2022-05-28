@@ -14,7 +14,8 @@ import {
     Text,
     useColorModeValue,
     FormErrorMessage,
-    useToast
+    useToast,
+    Spinner
 } from "@chakra-ui/react";
 import InputMask from "react-input-mask";
 import { useState } from "react";
@@ -165,9 +166,8 @@ export default function SignUp() {
                                         color={"white"}
                                         _hover={{ bg: "pink.300" }}
                                         type="submit"
-                                        disabled={loading}
-                                    >
-                                        Cadastrar
+                                        disabled={loading}>
+                                        {loading ? <Spinner/> : 'Cadastrar'}
                                     </Button>
                                 </Stack>
                                 <Stack pt={6}>
