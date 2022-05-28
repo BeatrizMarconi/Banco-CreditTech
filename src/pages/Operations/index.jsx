@@ -52,7 +52,8 @@ export default function Operations() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const cancelRef = React.useRef()
     const [inputMoney, setInputMoney] = useState(0)
-    const {saldo, setSaldo} = useContext(AppContext);
+    const { saldo, setSaldo } = useContext(AppContext);
+    const [loading, setLoading] = useState(false);
     const toast = useToast()
 
     const handleChange = (event, value, maskedValue) => {
@@ -88,28 +89,46 @@ export default function Operations() {
             return false
         }
         else {
-            api.post("/conta/operacao", obj)
-                .then(() => {
-                    onOpen()
-                    api.get(`/conta/saldo/${user.cpf}`)
-                        .then((res) => {
-                            setSaldo(res.data.saldo)
-                        })
-                        .catch(() => {
-
-                        })
-                })
-                .catch(() => {
-                    toast({
-                        title: 'Ops algo deu errado!',
-                        status: 'error',
-                        duration: 6000,
-                        position: 'top',
-                        isClosable: true,
+            api.get("/conta")
+                .then((res) => {
+                    const cpfValidação = res.data.find((item) => {
+                        return item.cpf === data.destinatario
                     })
+                    if (cpfValidação) {
+                        setLoading(true);
+                        api.post("/conta/operacao", obj)
+                            .then(() => {
+                                setLoading(false);
+                                onOpen()
+                                api.get(`/conta/saldo/${user.cpf}`)
+                                    .then((res) => {
+                                        setSaldo(res.data.saldo)
+                                    })
+                                    .catch(() => {
+
+                                    })
+                            })
+                            .catch(() => {
+                                toast({
+                                    title: 'Ops algo deu errado!',
+                                    status: 'error',
+                                    duration: 6000,
+                                    position: 'top',
+                                    isClosable: true,
+                                })
+                                setLoading(false);
+                            })
+                    } else {
+                        toast({
+                            title: 'CPF inválido!',
+                            status: 'error',
+                            duration: 6000,
+                            position: 'top',
+                            isClosable: true,
+                        })
+                    }
                 })
         }
-
     }
 
     return (
@@ -164,7 +183,8 @@ export default function Operations() {
                                         _hover={{ bg: 'blue.500', }}
                                         mt={7}
                                         width={200}
-                                        type="submit">
+                                        type="submit"
+                                        disabled={loading}>
                                         Enviar
                                     </Button>
                                 </Stack>

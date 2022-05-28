@@ -33,29 +33,46 @@ export default function SignUp() {
 
 
     const goToSignUp = (data) => {
-        setLoading(true);
-        api.post("/conta", data)
+        api.get("/conta")
             .then((res) => {
-                toast({
-                    title: 'Usuário cadastrado com sucesso!',
-                    status: 'success',
-                    duration: 4000,
-                    position: 'top',
-                    isClosable: true,
+                const user = res.data.find((item) => {
+                    return item.email === data.email || item.cpf === data.cpf
                 })
-                navigate(`/login`)
-                setLoading(false);
+                if (user) {
+                    toast({
+                        title: 'Esse cadastro ja existe!',
+                        status: 'error',
+                        duration: 6000,
+                        position: 'top',
+                        isClosable: true,
+                    })
+                } else {
+                    setLoading(true);
+                    api.post("/conta", data)
+                        .then((res) => {
+                            toast({
+                                title: 'Usuário cadastrado com sucesso!',
+                                status: 'success',
+                                duration: 4000,
+                                position: 'top',
+                                isClosable: true,
+                            })
+                            navigate(`/login`)
+                            setLoading(false);
+                        })
+                        .catch((error) => {
+                            toast({
+                                title: 'Erro ao cadastrar usuário!',
+                                status: 'error',
+                                duration: 6000,
+                                position: 'top',
+                                isClosable: true,
+                            })
+                            setLoading(false);
+                        });
+                }
+
             })
-            .catch((error) => {
-                toast({
-                    title: 'Erro ao cadastrar usuário!',
-                    status: 'error',
-                    duration: 6000,
-                    position: 'top',
-                    isClosable: true,
-                })
-                setLoading(false);
-            });
 
     }
 
