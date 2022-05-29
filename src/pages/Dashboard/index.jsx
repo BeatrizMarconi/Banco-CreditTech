@@ -1,4 +1,9 @@
-import { Box, Container, Flex, Heading, HStack, Text } from "@chakra-ui/react";
+import { Box, 
+        Container, 
+        Flex, 
+        Heading,
+        HStack, 
+        Text } from "@chakra-ui/react";
 import Header from "../../components/Header";
 import TableExtract from "../../components/TableExtract";
 import { MdAttachMoney } from "react-icons/md";
@@ -14,6 +19,7 @@ export default function Dashboard() {
     const goToOperations = () => navigate(`/operations`);
     const {monthSelect, setMonthSelect} = useContext(AppContext);
 
+    // muda no context o monthSelect para null
     useEffect(()=>{
         setMonthSelect(null)
     },[])
@@ -43,7 +49,7 @@ export default function Dashboard() {
                                 borderRadius={8}
                                 m={2}
                             >
-                                <TableExtract initialValue={0} finalValue={6} />
+                                <TableExtract initialValue={0} finalValue={6} /> {/*passa por prop para TableExtract e exibe*/}
 
                             </Box>
                             <Box width="30%">

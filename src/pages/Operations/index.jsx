@@ -22,12 +22,12 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
-import { isLogged } from "../../services/auth";
 import InputMask from "react-input-mask";
 import api from "../../services/api";
 import IntlCurrencyInput from "react-intl-currency-input";
 import { AppContext } from "../../context/appContext";
 
+//config da mascara input valor
 const currencyConfig = {
     locale: "pt-BR",
     formats: {
@@ -44,22 +44,25 @@ const currencyConfig = {
 
 export default function Operations() {
 
+    //do chakra
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const cancelRef = React.useRef()
+    const toast = useToast()
+
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")));
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const cancelRef = React.useRef()
     const [inputMoney, setInputMoney] = useState(0)
     const { saldo, setSaldo } = useContext(AppContext);
     const [loading, setLoading] = useState(false);
-    const toast = useToast()
+    const navigateHome = () => navigate('/dashboard');
 
+    //guarda valor digitado na state setInputMoney.
     const handleChange = (event, value, maskedValue) => {
         setInputMoney(value)
     }
-
-    const navigateHome = () => navigate('/dashboard');
-
+    
+    // cria um objeto e valida se os dados estão de acordo e se existe o CPF na base, se sim ele leva os dados e atualiza o context do saldo.
     const getOperationData = (data) => {
 
         const obj = {
@@ -97,7 +100,7 @@ export default function Operations() {
                         api.post("/conta/operacao", obj)
                             .then(() => {
                                 setLoading(false);
-                                onOpen()
+                                onOpen() //chama o alert de escolhas
                                 api.get(`/conta/saldo/${user.cpf}`)
                                     .then((res) => {
                                         setSaldo(res.data.saldo)
@@ -192,6 +195,7 @@ export default function Operations() {
                 </Container>
             </Box>
 
+        {/*abre um alert para escolha*/}
             <AlertDialog
                 isOpen={isOpen}
                 leastDestructiveRef={cancelRef}

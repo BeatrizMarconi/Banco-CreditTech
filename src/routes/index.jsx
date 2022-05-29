@@ -10,6 +10,7 @@ import { isLogged } from "../services/auth";
 
 export default function RoutesPages(){
 
+    //verifica se tem algo dentro de userIsLogged, se sim deixa acessar a rota se não retorna para home
     const Private = ({children}) => {
         const [userIsLogged] = isLogged();
 

@@ -6,21 +6,9 @@ import {
     Heading,
     Image,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
-import { isLogged } from "../../services/auth";
 
 export default function Home() {
-
-    const navigate = useNavigate();
-    const [userIsLogged] = isLogged();
-
-    useEffect(() => {
-        if (userIsLogged) {
-            navigate(`/dashboard`);
-        }
-    });
 
     return (
         <>

@@ -22,12 +22,15 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 export default function Login() {
 
-    const navigate = useNavigate();
-    const { register, handleSubmit } = useForm();
+    //useToast e showPassword do chakra
     const toast = useToast()
     const [showPassword, setShowPassword] = useState(false);
+
+    const navigate = useNavigate();
+    const { register, handleSubmit } = useForm();
     const [loading, setLoading] = useState(false);
 
+    //recebe o email de goToLogin e verifica se em conta tem esse email, se sim gera um token e guarda o token e os dados da conta no localStorage e navega para dashboard, se não da erro.
     const getUser = (email) => {
         api.get("/conta")
             .then((res) => {
@@ -48,14 +51,13 @@ export default function Login() {
                         isClosable: true,
                     })
                 }
-
-                console.log(user)
             })
             .catch((error) => {
                 console.log(error)
             })
     }
 
+    //Leva os dados do login e chama a função getUser passando o email
     const goToLogin = (data) => {
         setLoading(true)
         api.post("/login", data)
@@ -64,15 +66,9 @@ export default function Login() {
                 setLoading(false)
             })
             .catch((error) => {
-                toast({
-                    title: 'Usuário ou senha incorretos!',
-                    status: 'error',
-                    duration: 6000,
-                    isClosable: true,
-                })
+                console.log(error)
                 setLoading(false);
             });
-
     };
 
     return (

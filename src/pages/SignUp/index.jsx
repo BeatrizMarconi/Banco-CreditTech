@@ -26,13 +26,16 @@ import api from "../../services/api"
 
 export default function SignUp() {
 
-    const navigate = useNavigate();
+    //do chakra
     const [showPassword, setShowPassword] = useState(false);
-    const { register, handleSubmit, formState: { errors } } = useForm();
     const toast = useToast()
+
+    const navigate = useNavigate();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [loading, setLoading] = useState(false);
 
 
+    //verifica se existe o CPF ou o EMAIL na base, se sim não deixa cadastrar, se não existir ele leva os dados.
     const goToSignUp = (data) => {
         api.get("/conta")
             .then((res) => {
@@ -72,9 +75,7 @@ export default function SignUp() {
                             setLoading(false);
                         });
                 }
-
             })
-
     }
 
     return (

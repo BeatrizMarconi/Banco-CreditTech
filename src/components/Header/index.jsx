@@ -1,4 +1,3 @@
-import React, { useContext, useEffect, useState } from "react";
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { FiChevronDown } from "react-icons/fi";
 import {
@@ -22,6 +21,7 @@ import {
     Spinner,
 
 } from "@chakra-ui/react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
 import { isLogged } from "../../services/auth";
@@ -34,20 +34,25 @@ import getFirstName from "../../helpers/getFirstName";
 
 export default function Header() {
 
+    //useDisclosure do chakra 
     const { isOpen, onOpen, onClose } = useDisclosure();
+
     const navigate = useNavigate();
     const goToLogin = () => navigate(`/login`);
     const goToProfile = () => navigate(`/profile`);
     const [userIsLogged] = isLogged();
     const {saldo, setSaldo} = useContext(AppContext);
-    const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")));
+    const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user"))); //guarda o usuário salvo no localStorage.
     const [saldoLoad, setSaldoLoad] = useState(true);
 
+
+    // Função para limpar o localStorage e navegar para home.
     const logout = () => {
         window.localStorage.clear();
         navigate(`/`);
     };
 
+    //traz o saldo e atualiza o context.
     useEffect(() => {
         if (user) {
             api.get(`/conta/saldo/${user.cpf}`)
@@ -55,8 +60,8 @@ export default function Header() {
                     setSaldo(res.data.saldo)
                     setSaldoLoad(false)
                 })
-                .catch(() => {
-
+                .catch((error) => {
+                    console.log(error)
                 })
         }
     }, [])
@@ -85,7 +90,7 @@ export default function Header() {
                             <Box p={2}>
                                 <Image src={logo} boxSize="70px" />
                             </Box>
-                            {userIsLogged && (
+                            {userIsLogged && ( //se tiver algo dentro de userIsLogged executa.
                                 <HStack
                                     as={"nav"}
                                     spacing={4}
@@ -96,7 +101,7 @@ export default function Header() {
                             )}
                         </HStack>
                         <HStack spacing={{ base: "0", md: "6" }}>
-                            {userIsLogged && (
+                            {userIsLogged && ( //se tiver algo dentro de userIsLogged executa.
                                 <Flex alignItems={"center"}>
                                     <Box
                                         marginRight={8}
@@ -142,7 +147,7 @@ export default function Header() {
                                 </Flex>
                             )}
                         </HStack>
-                        {!userIsLogged && (
+                        {!userIsLogged && ( //se não tiver nada em userIsLogged
                             <Stack
                                 flex={{ base: 1, md: 0 }}
                                 justify={"flex-end"}

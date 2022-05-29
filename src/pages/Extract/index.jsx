@@ -1,9 +1,9 @@
-import { Box, 
-    Container, 
-    FormLabel, 
-    Heading, 
-    Select, 
-    Text } from "@chakra-ui/react";
+import {Box, 
+        Container, 
+        FormLabel, 
+        Heading, 
+        Select, 
+        Text } from "@chakra-ui/react";
 import { useContext } from "react";
 import Header from "../../components/Header";
 import TableMovements from "../../components/TableExtract";
@@ -13,6 +13,7 @@ export default function TableExtract() {
 
     const {monthSelect, setMonthSelect} = useContext(AppContext);
 
+    // atualiza o context monthSelect com o valor escolhido pelo usuário
     const buscaExtratoMes = (e) => {
         setMonthSelect(e.target.value)
     }
@@ -53,7 +54,7 @@ export default function TableExtract() {
                             p={4}
                             borderRadius={8}>
 
-                            <TableMovements initialValue={0} finalValue={-1} />
+                            <TableMovements initialValue={0} finalValue={-1} /> {/*passa por prop para TableExtract e exibe*/} 
                         </Box>
                     </Box>
                 </Container>
