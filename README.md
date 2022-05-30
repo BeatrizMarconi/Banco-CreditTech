@@ -8,25 +8,25 @@ Node versão 16.15.0
 
 ## Libs
 
-Chakra ui/icons versão 2.0.0 - https://chakra-ui.com/docs/components/media-and-icons/icon
+[Chakra ui/icons versão 2.0.0](https://chakra-ui.com/docs/components/media-and-icons/icon)
 
-Chakra ui/react versão 2.0.1 - https://chakra-ui.com/
+[Chakra ui/react versão 2.0.1](https://chakra-ui.com/)
 
-Axios versão 0.27.2 - https://axios-http.com/ptbr/docs/intro
+[Axios versão 0.27.2](https://axios-http.com/ptbr/docs/intro)
 
-Moment versão 2.29.3 - https://momentjs.com/
+[Moment versão 2.29.3](https://momentjs.com/)
 
-React-hook-form versão 7.31.1 - https://react-hook-form.com/
+[React-hook-form versão 7.31.1](https://react-hook-form.com/)
 
-React-icons versão 4.3.1 - https://react-icons.github.io/react-icons/
+[React-icons versão 4.3.1](https://react-icons.github.io/react-icons/)
 
-React-input-mask versão 2.0.4 - https://github.com/sanniassin/react-input-mask
+[React-input-mask versão 2.0.4](https://github.com/sanniassin/react-input-mask)
 
-React-router-dom versão 6.3.0 - https://github.com/remix-run/react-router#readme
+[React-router-dom versão 6.3.0](https://github.com/remix-run/react-router#readme)
 
-React-intl-currency-input versão 0.2.6 - https://github.com/thiagozanetti/react-intl-currency-input#readme
+[React-intl-currency-input versão 0.2.6](https://github.com/thiagozanetti/react-intl-currency-input#readme)
 
-### Rodar projeto
+## Rodar projeto
 
 ```bash
 git clone https://github.com/BeatrizMarconi/Banco-CreditTech.git
