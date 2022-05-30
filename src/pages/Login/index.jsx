@@ -66,7 +66,13 @@ export default function Login() {
                 setLoading(false)
             })
             .catch((error) => {
-                console.log(error)
+                toast({
+                    title: 'Usuário ou senha incorretos!',
+                    status: 'error',
+                    duration: 6000,
+                    position: 'top',
+                    isClosable: true,
+                })
                 setLoading(false);
             });
     };

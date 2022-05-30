@@ -44,7 +44,7 @@ export default function SignUp() {
                 })
                 if (user) {
                     toast({
-                        title: 'Esse cadastro ja existe!',
+                        title: 'E-mail ou CPF já cadastrados!',
                         status: 'error',
                         duration: 6000,
                         position: 'top',
