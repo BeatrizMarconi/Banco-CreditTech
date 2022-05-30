@@ -26,11 +26,12 @@ React-router-dom versão 6.3.0 - https://github.com/remix-run/react-router#readm
 
 React-intl-currency-input versão 0.2.6 - https://github.com/thiagozanetti/react-intl-currency-input#readme
 
+### Rodar projeto
 
 ```bash
 git clone https://github.com/BeatrizMarconi/Banco-CreditTech.git
 
-# instalação das dependencias
+# instalação das dependências
 npm install  
 
 # Rodar Projeto
