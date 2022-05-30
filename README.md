@@ -22,8 +22,16 @@ Esse projeto é um portal web voltado para finanças, onde o usuário pode naveg
 </table> 
 
 ## Libs
+<table>
+    <tr>
+        <th>Lib</th>
+        <th>Versão</th>
+    </tr>
+    <tr>
+        <th>[Chakra ui/icons](https://chakra-ui.com/docs/components/media-and-icons/icon)</th>
+        <th>versão 2.0.0</th>
+    </tr>
 
-[Chakra ui/icons versão 2.0.0](https://chakra-ui.com/docs/components/media-and-icons/icon)
 
 [Chakra ui/react versão 2.0.1](https://chakra-ui.com/)
 
@@ -40,6 +48,7 @@ Esse projeto é um portal web voltado para finanças, onde o usuário pode naveg
 [React-router-dom versão 6.3.0](https://github.com/remix-run/react-router#readme)
 
 [React-intl-currency-input versão 0.2.6](https://github.com/thiagozanetti/react-intl-currency-input#readme)
+</table>
 
 ## Rodar projeto
 
