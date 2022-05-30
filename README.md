@@ -2,9 +2,24 @@
 Esse projeto é um portal web voltado para finanças, onde o usuário pode navegar por sua conta, consultar seu saldo, extrato e realizar transferências entre contas cadastradas.
 
 ## Tecnologias
-React versão 18.1.0
-
-Node versão 16.15.0
+<table>
+  <tr>
+    <th>Lib</th>
+    <th>Versão</th>
+  </tr>
+  <tr>
+    <td>React</td>
+    <td>
+      18.1.0
+    </td>
+  </tr>
+  <tr>
+    <td>NodeJs</td>
+    <td>
+      16.15.0
+    </td>
+  </tr>
+</table> 
 
 ## Libs
 
