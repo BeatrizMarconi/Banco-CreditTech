@@ -21,7 +21,7 @@ Esse projeto é um portal web voltado para finanças, onde o usuário pode naveg
   </tr>
 </table> 
 
-## Libs
+## Libs externas
 
 [Chakra ui/icons versão 2.0.0](https://chakra-ui.com/docs/components/media-and-icons/icon)
 
