@@ -121,7 +121,7 @@ export default function Operations() {
                             })
                     } else {
                         toast({
-                            title: 'CPF inválido!',
+                            title: 'CPF do destinatário não cadastrado!',
                             status: 'error',
                             duration: 6000,
                             position: 'top',
